@@ -5,11 +5,11 @@ export default function LowerNav({ display }) {
 
         </div>
         <ul className="navlinks">
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact Us</li>
-            <li>Products</li>
-            <li>Featured</li>
+            <li>Spring/collection</li>
+            <li>Women</li>
+            <li>Men Us</li>
+            <li>Kids</li>
+            <li>Gifts</li>
         </ul>
         <div>
 
