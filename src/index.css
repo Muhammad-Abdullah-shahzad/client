@@ -2,6 +2,9 @@
 
 
 :root {
-    --bg-color: rgb(247, 245, 241);
+    --bg-color-main: rgb(247, 245, 241);
     --main-color: rgb(157, 82, 72);
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
 }

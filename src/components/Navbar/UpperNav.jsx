@@ -8,10 +8,10 @@ import 'swiper/css';
 import './UpperNav.css';
 
 const announcements = [
-  "🌟 Free shipping on all orders over $50!",
-  "🔥 Mid-Season Sale! Up to 50% off select items.",
-  "✨ New arrivals just landed. Shop the latest trends.",
-  "✉️ Subscribe to our newsletter for 10% off your first order."
+  " Free shipping on all orders over $50!",
+  " Mid-Season Sale! Up to 50% off select items.",
+  " New arrivals just landed. Shop the latest trends.",
+  " Subscribe to our newsletter for 10% off your first order."
 ];
 
 const UpperNav = () => {
@@ -23,7 +23,7 @@ const UpperNav = () => {
         slidesPerView={1}
         loop={true}
         autoplay={{
-          delay: 3500,
+          delay: 2500,
           disableOnInteraction: false,
         }}
         allowTouchMove={false} // Prevents dragging since it's just a text carousel
