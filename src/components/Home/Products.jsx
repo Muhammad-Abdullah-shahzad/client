@@ -1,6 +1,6 @@
 import ProductCard from "./ProductCard";
 
-const products = [
+export const products = [
   {
     id: 1,
     name: "Nicole Jacket",
@@ -123,6 +123,11 @@ const products = [
   },
 ];
 
+export const renderProduct = (products) => {
+  return products.map((product) => (
+    <ProductCard key={product.id} product={product} />
+  ))
+}
 export default function Products() {
   return (
     <section className="py-16 px-4 bg-[var(--bg-color-main)]">
@@ -130,9 +135,7 @@ export default function Products() {
         Our Collection
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {renderProduct(products)}
       </div>
     </section>
   );
