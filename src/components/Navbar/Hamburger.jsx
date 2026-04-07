@@ -1,13 +1,16 @@
-import { FiMenu } from 'react-icons/fi';
+import { CiMenuFries } from 'react-icons/ci';
 import styles from './hamburger.module.css'
 
 export default function Hamburger({ setDisplay }) {
     return (
-        <button className={styles.hamburger}
-            onClick={() => {
-                setDisplay(true);
-            }}>
-            <FiMenu size={24} />
-        </button>
+        <div className={styles.container}>
+            <button className={styles.hamburger}
+                onClick={() => {
+                    setDisplay(true);
+                }}>
+                <CiMenuFries size={26} color="white" strokeWidth={1} />
+            </button>
+        </div>
+
     )
 }

@@ -6,8 +6,6 @@
 
 }
 
-
-
 .navlinks {
     display: flex;
     justify-content: space-around;
@@ -22,14 +20,16 @@
 
 @media screen and (max-width:768px) {
     .lowerNav {
-        position: absolute;
+        position: fixed;
         z-index: 100;
         top: 0;
-        bottom: 0;
-        height: 100vh;
-        width: 25vw;
+        right: 0;
+
+
+        height: 25vh;
+        /* width: 25vw; */
         background: var(--bg-color-main);
-        transform: translateX(-200px);
+        transform: translateY(-276px);
         transition: all 0.3s ease-in 0s;
     }
 
@@ -39,10 +39,16 @@
 
     .navlinks {
         flex-direction: column;
-
         align-items: center;
         height: 40%;
         width: 100%;
+        gap: 8px;
+    }
+
+    li {
+
+        width: 100%;
+        text-align: center;
     }
 
 }

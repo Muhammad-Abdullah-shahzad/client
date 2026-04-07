@@ -125,8 +125,8 @@ const products = [
 
 export default function Products() {
   return (
-    <section className="py-16 px-4">
-      <h2 className="text-center text-2xl tracking-widest uppercase mb-12 text-[#2c2c2c] font-normal">
+    <section className="py-16 px-4 bg-[var(--bg-color-main)]">
+      <h2 className="text-center text-2xl tracking-widest uppercase mb-12 text-[#2c2c2c] font-normal sticky top-0 bg-[var(--bg-color-main)] z-10 py-2">
         Our Collection
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">

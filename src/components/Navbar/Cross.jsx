@@ -7,7 +7,7 @@ export default function Cross({ setDisplay }) {
             onClick={() => {
                 setDisplay(false);
             }}>
-            <FiX size={24} />
+            <FiX size={24} color='white' strokeWidth={2} />
         </button>
     );
 }
