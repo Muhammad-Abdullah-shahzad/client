@@ -46,7 +46,7 @@ const products = [
 
 export default function ProductDetails() {
   const { id } = useParams();
-  const product = products.find(p => p.id === parseInt(id)) || products[1]; // Defaulting to Hector Trousers (id 2) for demo
+  const product = products.find(p => String(p.id) === String(id)) || products[1]; // Handle string IDs from API
 
   return (
     <div className="product-details-page min-h-screen">

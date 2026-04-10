@@ -3,11 +3,15 @@ import { Link } from "react-router-dom";
 const textColor = "text-[rgb(157,82,72)]";
 
 export default function ProductCard({ product }) {
+  const productId = product._id || product.productId || product.id;
+  const imageUrl = product.image || product.images?.[0]?.imageUrl || "";
+  const label = product.material || product.tags?.[0] || "Premium Quality";
+
   return (
-    <Link to={`/product/${product.id}`} className="flex flex-col items-center cursor-pointer group no-underline">
+    <Link to={`/product/${productId}`} className="flex flex-col items-center cursor-pointer group no-underline">
       <div className="bg-[var(--bg-color-main)] w-full aspect-[3/4] flex items-center justify-center overflow-hidden rounded-sm">
         <img
-          src={product.image}
+          src={imageUrl}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
@@ -17,7 +21,7 @@ export default function ProductCard({ product }) {
           {product.name}
         </h3>
         <p className={`mt-1 text-xs tracking-wide ${textColor} text-center`}>
-          {product.material}
+          {label}
         </p>
       </div>
     </Link>

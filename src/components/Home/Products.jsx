@@ -127,7 +127,7 @@ export const products = [
 
 export const renderProduct = (products) => {
   return products.map((product) => (
-    <ProductCard key={product.id} product={product} />
+    <ProductCard key={product._id} product={product} />
   ))
 }
 export default function Products() {
@@ -140,8 +140,8 @@ export default function Products() {
         {renderProduct(products)}
       </div>
       <div className="flex justify-center mt-12">
-        <Link 
-          to="/all-products" 
+        <Link
+          to="/all-products"
           className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-[#2c2c2c] border-b border-transparent hover:border-[#2c2c2c] transition-all duration-300 pb-1"
         >
           View All
