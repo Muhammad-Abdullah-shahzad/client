@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 
 export const products = [
+  // ... (keeping products array as is for brevity in thought, but I will replace the whole section correctly)
   {
     id: 1,
     name: "Nicole Jacket",
@@ -136,6 +138,14 @@ export default function Products() {
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {renderProduct(products)}
+      </div>
+      <div className="flex justify-center mt-12">
+        <Link 
+          to="/all-products" 
+          className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-[#2c2c2c] border-b border-transparent hover:border-[#2c2c2c] transition-all duration-300 pb-1"
+        >
+          View All
+        </Link>
       </div>
     </section>
   );
