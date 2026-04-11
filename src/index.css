@@ -12,3 +12,16 @@
     font-family: "Playfair Display", serif;
     background-color: var(--bg-color-main);
 }
+
+/* Pagination Styles */
+.pagination-container .page-item {
+    @apply flex items-center justify-center;
+}
+
+.pagination-container .page-link {
+    @apply px-4 py-2 text-xs tracking-[0.2em] border border-transparent transition-all duration-300 text-[#2c2c2c] hover:border-[#2c2c2c] cursor-pointer;
+}
+
+.pagination-container .pagination-active .page-link {
+    @apply border-[#2c2c2c] bg-[#2c2c2c] text-white;
+}

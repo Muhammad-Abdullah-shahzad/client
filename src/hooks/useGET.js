@@ -49,7 +49,7 @@ const useGET = (url, options = {}) => {
     fetchData(abortController);
 
     return () => abortController.abort();
-  }, []);
+  }, [url]);
 
   const refetch = () => {
     const abortController = new AbortController();
