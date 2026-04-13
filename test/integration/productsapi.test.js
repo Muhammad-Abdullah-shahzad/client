@@ -9,8 +9,8 @@ describe("Integration Tests products API", () => {
         const data = response.body;
 
         expect(response.status).toBe(200);
-        expect(Array.isArray(data)).toBe(true);
-        expect(data.length).toBeGreaterThan(0);
+        expect(Array.isArray(data.products)).toBe(true);
+        expect(data.products.length).toBeGreaterThan(0);
     });
 
     it("should fetch searched product", async () => {
@@ -18,8 +18,8 @@ describe("Integration Tests products API", () => {
         const data = response.body;
 
         expect(response.status).toBe(200);
-        expect(Array.isArray(data)).toBe(true);
-        data.forEach(product => {
+        expect(Array.isArray(data.products)).toBe(true);
+        data.products.forEach(product => {
             expect(product.name).toContain("Eclipse");
         })
     })
@@ -29,8 +29,8 @@ describe("Integration Tests products API", () => {
         const data = response.body;
 
         expect(response.status).toBe(200);
-        expect(Array.isArray(data)).toBe(true);
-        data.forEach(product => {
+        expect(Array.isArray(data.products)).toBe(true);
+        data.products.forEach(product => {
             expect(product.name.toLowerCase()).toContain("eclipse");
         })
     })
@@ -39,8 +39,8 @@ describe("Integration Tests products API", () => {
         const data = response.body;
 
         expect(response.status).toBe(200);
-        expect(Array.isArray(data)).toBe(true);
-        data.forEach(product => {
+        expect(Array.isArray(data.products)).toBe(true);
+        data.products.forEach(product => {
             expect(product.gender).toBe("Women");
         })
     })
@@ -49,8 +49,8 @@ describe("Integration Tests products API", () => {
         const data = response.body;
 
         expect(response.status).toBe(200);
-        expect(Array.isArray(data)).toBe(true);
-        data.forEach(product => {
+        expect(Array.isArray(data.products)).toBe(true);
+        data.products.forEach(product => {
             expect(product.gender).toBe("Women");
         })
     })
@@ -59,15 +59,15 @@ describe("Integration Tests products API", () => {
         const data = response.body;
 
         expect(response.status).toBe(200);
-        expect(Array.isArray(data)).toBe(true);
-        expect(data).toHaveLength(3);
+        expect(Array.isArray(data.products)).toBe(true);
+        expect(data.products).toHaveLength(3);
     })
     it("should fetch products with limit 2", async () => {
         const response = await request(BASE_URL).get("/myecom/products?limit=2");
         const data = response.body;
 
         expect(response.status).toBe(200);
-        expect(Array.isArray(data)).toBe(true);
-        expect(data).toHaveLength(2);
+        expect(Array.isArray(data.products)).toBe(true);
+        expect(data.products).toHaveLength(2);
     })
 }); 

@@ -1,19 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useGET from "../../hooks/useGET";
 import { renderProduct } from "../../components/Home/Products";
 import ReactPaginate from "react-paginate";
 import { setDataLocalStorage, getDataLocalStorage } from "../../Utils/LocalStorage";
+import Filters from "../../components/AllProduct/Filters";
+import { VscSettings } from "react-icons/vsc";
+
 export default function AllProduct() {
   const [activePage, setActivePage] = useState(getDataLocalStorage("activePage") || 1);
+  const [selectedGender, setSelectedGender] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("high_to_low");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
   const itemsPerPage = 8;
 
   // Handle ESM/CJS interop for react-paginate
   const Paginate = ReactPaginate.default || ReactPaginate;
 
-  const { data: fetchedProducts, loading, error } = useGET(
-    `${import.meta.env.VITE_API_URL}/myecom/products?page=${activePage}&limit=${itemsPerPage}`
-  );
+  // Reset page when filters change
+  useEffect(() => {
+    setActivePage(1);
+    setDataLocalStorage("activePage", 1);
+  }, [selectedGender, selectedCategory, selectedPrice]);
 
+  const { data: fetchedProducts, loading, error } = useGET(
+    `${import.meta.env.VITE_API_URL}/myecom/products?page=${activePage}&limit=${itemsPerPage}${selectedGender ? `&gender=${selectedGender}` : ""}${selectedCategory ? `&category=${selectedCategory}` : ""}${selectedPrice ? `&price=${selectedPrice}` : ""}`
+  );
+  console.log(fetchedProducts);
   if (loading) {
     return (
       <div className="max-w-screen-xl mx-auto py-32 px-4 flex justify-center items-center">
@@ -42,10 +56,40 @@ export default function AllProduct() {
 
   return (
     <div className="max-w-screen-xl mx-auto py-16 px-4 min-h-screen">
-      <h1 className="text-center text-3xl tracking-widest uppercase mb-16 text-[#2c2c2c] font-normal">
-        All Products
-      </h1>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-4">
+        <div className="flex-1 order-2 md:order-1">
+          <button
+            onClick={() => setIsFilterOpen(true)}
+            className="group flex items-center space-x-3 text-[10px] tracking-[0.4em] uppercase text-[#2c2c2c] hover:text-gray-500 transition-all duration-300"
+          >
+            <VscSettings className="text-lg rotate-90" />
+            <span>Filter</span>
+          </button>
+        </div>
+
+        <h1 className="text-center text-3xl tracking-[0.3em] uppercase text-[#2c2c2c] font-light order-1 md:order-2">
+          All Products
+        </h1>
+
+        <div className="flex-1 order-3 text-right hidden md:block">
+          <p className="text-[10px] tracking-[0.2em] uppercase text-gray-400">
+            {fetchedProducts?.totalProducts || 0} Products
+          </p>
+        </div>
+      </div>
+
+      <Filters
+        isOpen={isFilterOpen}
+        onClose={() => setIsFilterOpen(false)}
+        selectedGender={selectedGender}
+        setSelectedGender={setSelectedGender}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        selectedPrice={selectedPrice}
+        setSelectedPrice={setSelectedPrice}
+      />
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
         {renderProduct(fetchedProducts?.products || [])}
       </div>
 
@@ -59,7 +103,7 @@ export default function AllProduct() {
           pageCount={pageCount}
           previousLabel="⟨"
           forcePage={activePage - 1}
-          containerClassName="flex justify-center mt-20 gap-x-1 sm:gap-x-2 items-center"
+          containerClassName="flex justify-center mt-32 gap-x-1 sm:gap-x-2 items-center"
           pageClassName="page-item"
           pageLinkClassName="px-3 sm:px-4 py-2 text-[10px] sm:text-xs tracking-widest border border-transparent transition-all duration-300 text-[#2c2c2c] hover:border-[#2c2c2c]"
           activeClassName="bg-[#2c2c2c] text-white"

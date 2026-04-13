@@ -3,10 +3,17 @@ import Line from "./Line";
 import LowerNav from "./LowerNav";
 import Hamburger from "./Hamburger";
 import Cross from "./Cross";
+import Cart from "../Cart/Cart";
 import { useState } from "react";
+import { getDataLocalStorage } from "../../Utils/LocalStorage";
 
 export default function Navbar() {
     const [showSideBar, setShowSideBar] = useState(false);
+    const [showCart, setShowCart] = useState(false);
+
+    // grab userId from localStorage (set this wherever you handle auth/user session)
+    const userId = getDataLocalStorage('myecom_user_Id');
+
     return (
         <>
             <UpperNav />
@@ -16,7 +23,10 @@ export default function Navbar() {
             ) : (
                 <Hamburger setDisplay={setShowSideBar} />
             )}
-            <LowerNav display={showSideBar} />
+            <LowerNav display={showSideBar} onCartClick={() => setShowCart(true)} />
+            {showCart && (
+                <Cart userId={userId} onClose={() => setShowCart(false)} />
+            )}
         </>
     )
 }
