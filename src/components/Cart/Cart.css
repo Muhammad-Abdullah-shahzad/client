@@ -96,7 +96,8 @@
 
 .cart-footer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 16px;
   font-weight: 600;
   font-size: 15px;
   padding-top: 16px;

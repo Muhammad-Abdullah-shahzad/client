@@ -9,7 +9,7 @@ import generateUUID from '../../Utils/generateUUID';
 import { getDataLocalStorage, setDataLocalStorage } from '../../Utils/LocalStorage';
 export default function Home() {
     useEffect(() => {
-        if (!getDataLocalStorage('ecom_user_id')) {
+        if (!getDataLocalStorage('ecom_user_Id')) {
             setDataLocalStorage('ecom_user_Id', generateUUID())
         }
     }, [])

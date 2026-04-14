@@ -12,7 +12,7 @@ export default function Navbar() {
     const [showCart, setShowCart] = useState(false);
 
     // grab userId from localStorage (set this wherever you handle auth/user session)
-    const userId = getDataLocalStorage('myecom_user_Id');
+    const userId = getDataLocalStorage('ecom_user_Id');
 
     return (
         <>
