@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { FiHeart, FiPlus, FiMinus, FiChevronDown, FiChevronUp } from "react-icons/fi";
+import AddToCartBtn from "../Cart/AddToCartBtn";
 
 const ProductDescription = ({ product }) => {
   const [activeAccordion, setActiveAccordion] = useState(null);
@@ -99,6 +100,14 @@ const ProductDescription = ({ product }) => {
               <FiChevronDown className="text-sm" />
             </div>
           </div>
+
+          {/* Add to Cart Button */}
+          <AddToCartBtn 
+            product={product} 
+            imageUrl={product.images?.[0]?.imageUrl || product.image} 
+            isLarge={true} 
+            className="mt-2"
+          />
 
           {/* Action Links */}
           <div className="flex flex-col gap-3 text-xs tracking-wide">

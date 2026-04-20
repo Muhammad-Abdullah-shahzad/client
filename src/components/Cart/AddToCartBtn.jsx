@@ -5,9 +5,9 @@ import { getDataLocalStorage } from "../../Utils/LocalStorage";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-export default function AddToCartBtn({ product, imageUrl, className = "" }) {
+export default function AddToCartBtn({ product, imageUrl, className = "", isLarge = false }) {
   const [cartStatus, setCartStatus] = useState("idle"); // idle | loading | success | error
-  console.log(product);
+
   const handleAddToCart = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -28,7 +28,7 @@ export default function AddToCartBtn({ product, imageUrl, className = "" }) {
           itemPrice: product.price,
         }),
       });
-      console.log(response.status);
+
       if (!response.ok) throw new Error("Failed to add to cart");
 
       setCartStatus("success");
@@ -39,6 +39,37 @@ export default function AddToCartBtn({ product, imageUrl, className = "" }) {
       setTimeout(() => setCartStatus("idle"), 1500);
     }
   };
+
+  if (isLarge) {
+    return (
+      <button
+        onClick={handleAddToCart}
+        disabled={cartStatus === "loading" || cartStatus === "success"}
+        className={`
+          w-full py-4 px-6 flex items-center justify-center gap-3
+          transition-all duration-300 ease-in-out uppercase text-xs tracking-[0.2em]
+          cursor-pointer border-none outline-none font-medium
+          ${cartStatus === "success"
+            ? "bg-green-600 text-white"
+            : cartStatus === "error"
+              ? "bg-red-500 text-white"
+              : "bg-[#2c2c2c] text-white hover:bg-[#444]"
+          }
+          ${className}
+        `}
+      >
+        {cartStatus === "loading" ? (
+          <AiOutlineLoading3Quarters className="animate-spin text-lg" />
+        ) : cartStatus === "success" ? (
+          <><AiOutlineCheck className="text-lg" /> Added to Bag</>
+        ) : cartStatus === "error" ? (
+          "Error Occurred"
+        ) : (
+          "Add to Bag"
+        )}
+      </button>
+    );
+  }
 
   return (
     <button
