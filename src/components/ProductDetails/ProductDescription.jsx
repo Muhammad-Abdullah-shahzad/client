@@ -13,8 +13,12 @@ const ProductDescription = ({ product }) => {
     setActiveAccordion(activeAccordion === index ? null : index);
   };
 
+  const productImages = product.images?.length > 0
+    ? product.images.map(img => img.imageUrl)
+    : [product.image || "https://via.placeholder.com/1000x1333?text=No+Image"];
+
   const accordions = [
-    { title: "Product details", content: "With their relaxed, yet precisely tailored cut, the Hector trousers provide a softened take on transitional suiting. They are cut from a textured blend of silk and wool, and feature a mid-rise waist, pleated front and wide legs. Side and back pockets, and belt loops." },
+    { title: "Product details", content: `With its meticulous design and premium craftsmanship, the ${product.name} represents the pinnacle of contemporary style. Crafted from ${product.material || 'high-quality materials'}, it offers both comfort and a sophisticated aesthetic suitable for any occasion.` },
     { title: "Care & Maintenance", content: "Professional dry clean only. Do not wash. Do not bleach. Do not tumble dry. Cool iron." },
     { title: "Return & Exchange", content: "Free returns within 30 days of purchase. Items must be in original condition with tags attached." },
     { title: "Payment Options & Security", content: "We accept all major credit cards, PayPal, and Apple Pay. Your transaction is secure and encrypted." },
@@ -35,9 +39,9 @@ const ProductDescription = ({ product }) => {
             "--swiper-navigation-size": "25px",
           }}
           className="h-full w-full"
-          loop={true}
+          loop={productImages.length > 1}
         >
-          {product.images.map((img, idx) => (
+          {productImages.map((img, idx) => (
             <SwiperSlide key={idx} className="flex items-center justify-center bg-[var(--bg-color-main)]">
               <img
                 src={img}
@@ -55,31 +59,35 @@ const ProductDescription = ({ product }) => {
           {/* Header */}
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-xl lg:text-2xl font-normal tracking-wide">{product.name}</h1>
-              <p className="text-[rgb(157,82,72)] text-sm mt-1">{product.material}</p>
+              <h1 className="text-xl lg:text-2xl font-normal tracking-wide uppercase">{product.name}</h1>
+              <p className="text-[rgb(157,82,72)] text-sm mt-1">{product.material || "Premium Selection"}</p>
             </div>
             <FiHeart className="text-xl cursor-pointer hover:fill-[rgb(157,82,72)] hover:text-[rgb(157,82,72)] transition-colors" />
           </div>
 
           {/* Price */}
           <div className="text-lg lg:text-xl font-normal">
-            {product.price}
+            $ {product.price?.toLocaleString()}
           </div>
 
           <hr className="border-[#e0e0e0]" />
 
           {/* Color Selector */}
-          <div>
-            <p className="text-xs tracking-widest uppercase mb-4">Color : Cherry Sangria (30LY)</p>
-            <div className="flex gap-3">
-              <div className="w-10 h-10 border border-[#2c2c2c] p-[2px] cursor-pointer">
-                <div className="w-full h-full bg-[#E5E4E2]"></div>
-              </div>
-              <div className="w-10 h-10 border border-transparent hover:border-[#2c2c2c] p-[2px] cursor-pointer">
-                <div className="w-full h-full bg-[#B9444B]"></div>
+          {product.images?.length > 0 && (
+            <div>
+              <p className="text-xs tracking-widest uppercase mb-4">Available Colors</p>
+              <div className="flex gap-3">
+                {product.images.map((img, idx) => (
+                  <div key={idx} className="w-10 h-10 border border-transparent hover:border-[#2c2c2c] p-[2px] cursor-pointer group" title={img.color}>
+                    <div
+                      className="w-full h-full border border-gray-200"
+                      style={{ backgroundColor: img.color.toLowerCase().replace(' ', '') }}
+                    ></div>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
+          )}
 
           <hr className="border-[#e0e0e0]" />
 
@@ -101,7 +109,9 @@ const ProductDescription = ({ product }) => {
 
           {/* Description Snippet */}
           <div className="text-sm leading-relaxed text-gray-600">
-            <p>With their relaxed, yet precisely tailored cut, the Hector trousers provide a softened take on transitional suiting. They are cut from Te...</p>
+            <p>
+              {product.description || `Experience the elegance of the ${product.name}. A perfect blend of style and comfort.`}
+            </p>
             <button className="text-[rgb(157,82,72)] underline mt-1 font-medium">Read more</button>
           </div>
 
@@ -117,7 +127,7 @@ const ProductDescription = ({ product }) => {
                   {activeAccordion === idx ? <FiMinus size={12} /> : <FiPlus size={12} />}
                 </button>
                 <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${activeAccordion === idx ? "max-h-40 pb-5" : "max-h-0"
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${activeAccordion === idx ? "max-h-60 pb-5" : "max-h-0"
                     }`}
                 >
                   <p className="text-xs leading-relaxed text-gray-600">
