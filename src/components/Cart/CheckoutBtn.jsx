@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export default function CheckoutBtn({ items, total, onClose }) {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleCheckout = () => {
     setLoading(true);
-    // Simulate checkout process
+    // Simulate slight delay for premium feel
     setTimeout(() => {
       setLoading(false);
-      alert(`Checkout successful! You paid $${total.toFixed(2)}.`);
       if (onClose) onClose();
-      // Normally here you'd redirect to payment gateway via React Router or Stripe
-    }, 1500);
+      navigate("/checkout", { state: { items, total } });
+    }, 800);
   };
 
   return (

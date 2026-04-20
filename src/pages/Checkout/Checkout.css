@@ -1,0 +1,28 @@
+.checkout-page {
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.account-details {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.payment-instructions h2::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: rgb(157, 82, 72);
+    margin: 8px auto 0;
+}

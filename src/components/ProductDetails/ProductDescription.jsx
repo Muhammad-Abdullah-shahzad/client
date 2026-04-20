@@ -102,10 +102,10 @@ const ProductDescription = ({ product }) => {
           </div>
 
           {/* Add to Cart Button */}
-          <AddToCartBtn 
-            product={product} 
-            imageUrl={product.images?.[0]?.imageUrl || product.image} 
-            isLarge={true} 
+          <AddToCartBtn
+            product={product}
+            imageUrl={product.images?.[0]?.imageUrl || product.image}
+            isLarge={true}
             className="mt-2"
           />
 

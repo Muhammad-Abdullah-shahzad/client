@@ -16,8 +16,8 @@ export default function LowerNav({ display, onCartClick, setDisplay }) {
             <li>Spring/collection</li>
             <li><Link to="/women" onClick={handleLinkClick}>Women</Link></li>
             <li><Link to="/men" onClick={handleLinkClick}>Mens</Link></li>
-            <li>Kids</li>
-            <li>Gifts</li>
+            <li><Link to="/kids" onClick={handleLinkClick}>Kids</Link></li>
+            <li><Link to="/gifts" onClick={handleLinkClick}>Gifts</Link></li>
         </ul>
         <div className="nav-icons">
             <button className="cart-icon-btn" onClick={onCartClick} aria-label="Open cart">

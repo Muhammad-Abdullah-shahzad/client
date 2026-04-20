@@ -5,17 +5,18 @@ import ReactPaginate from "react-paginate";
 import { setDataLocalStorage, getDataLocalStorage } from "../../Utils/LocalStorage";
 import Filters from "../../components/AllProduct/Filters";
 import { VscSettings } from "react-icons/vsc";
-type Gender = "Men" | "Women" | "";
+type Gender = "Men" | "Women" | "Kids" | "";
 
 type Props = {
   title?: string;
   gender?: Gender;
+  category?: string;
 }
 
-export default function AllProduct({ title = "All Products", gender = "" }: Props) {
+export default function AllProduct({ title = "All Products", gender = "", category = "" }: Props) {
   const [activePage, setActivePage] = useState(getDataLocalStorage("activePage") || 1);
   const [selectedGender, setSelectedGender] = useState(gender);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(category);
   const [selectedPrice, setSelectedPrice] = useState("high_to_low");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -36,7 +37,8 @@ export default function AllProduct({ title = "All Products", gender = "" }: Prop
 
   useEffect(() => {
     setSelectedGender(gender)
-  }, [gender])
+    setSelectedCategory(category)
+  }, [gender, category])
 
   console.log(fetchedProducts);
   if (loading) {
@@ -79,7 +81,7 @@ export default function AllProduct({ title = "All Products", gender = "" }: Prop
         </div>
 
         <h1 className="text-center text-3xl tracking-[0.3em] uppercase text-[#2c2c2c] font-light order-1 md:order-2">
-          All Products
+          {title}
         </h1>
 
         <div className="flex-1 order-3 text-right hidden md:block">
