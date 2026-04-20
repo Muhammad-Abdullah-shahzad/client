@@ -16,6 +16,16 @@
     padding: 10px;
 }
 
+.navlinks a {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.navlinks a:hover {
+    opacity: 0.7;
+}
+
 
 
 @media screen and (max-width:768px) {

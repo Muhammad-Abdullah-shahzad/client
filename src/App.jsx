@@ -10,8 +10,10 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/all-products" element={<AllProduct />} />
+        <Route path="/all-products" element={<AllProduct title="All Products" gender="" />} />
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/men" element={<AllProduct title="Men" gender="Men" />} />
+        <Route path="/women" element={<AllProduct title="Women's Collection" gender="Women" />} />
       </Routes>
     </BrowserRouter>
   )

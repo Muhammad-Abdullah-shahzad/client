@@ -23,7 +23,11 @@ export default function Navbar() {
             ) : (
                 <Hamburger setDisplay={setShowSideBar} />
             )}
-            <LowerNav display={showSideBar} onCartClick={() => setShowCart(true)} />
+            <LowerNav 
+                display={showSideBar} 
+                setDisplay={setShowSideBar}
+                onCartClick={() => setShowCart(true)} 
+            />
             {showCart && (
                 <Cart userId={userId} onClose={() => setShowCart(false)} />
             )}

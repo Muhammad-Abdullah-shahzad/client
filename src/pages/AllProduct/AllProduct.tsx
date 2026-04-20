@@ -5,10 +5,16 @@ import ReactPaginate from "react-paginate";
 import { setDataLocalStorage, getDataLocalStorage } from "../../Utils/LocalStorage";
 import Filters from "../../components/AllProduct/Filters";
 import { VscSettings } from "react-icons/vsc";
+type Gender = "Men" | "Women" | "";
 
-export default function AllProduct() {
+type Props = {
+  title?: string;
+  gender?: Gender;
+}
+
+export default function AllProduct({ title = "All Products", gender = "" }: Props) {
   const [activePage, setActivePage] = useState(getDataLocalStorage("activePage") || 1);
-  const [selectedGender, setSelectedGender] = useState("");
+  const [selectedGender, setSelectedGender] = useState(gender);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("high_to_low");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -24,9 +30,14 @@ export default function AllProduct() {
     setDataLocalStorage("activePage", 1);
   }, [selectedGender, selectedCategory, selectedPrice]);
 
-  const { data: fetchedProducts, loading, error } = useGET(
+  const { data: fetchedProducts, loading, error, refetch } = useGET(
     `${import.meta.env.VITE_API_URL}/myecom/products?page=${activePage}&limit=${itemsPerPage}${selectedGender ? `&gender=${selectedGender}` : ""}${selectedCategory ? `&category=${selectedCategory}` : ""}${selectedPrice ? `&price=${selectedPrice}` : ""}`
   );
+
+  useEffect(() => {
+    setSelectedGender(gender)
+  }, [gender])
+
   console.log(fetchedProducts);
   if (loading) {
     return (
@@ -48,7 +59,7 @@ export default function AllProduct() {
 
   const pageCount = Math.ceil((fetchedProducts?.totalProducts || 0) / itemsPerPage);
 
-  const handlePageClick = (event) => {
+  const handlePageClick = (event: { selected: number }) => {
     setActivePage(event.selected + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
     setDataLocalStorage("activePage", event.selected + 1);

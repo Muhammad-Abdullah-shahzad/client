@@ -1,14 +1,21 @@
+import { Link } from 'react-router-dom'
 import './LowerNav.css'
 
-export default function LowerNav({ display, onCartClick }) {
+export default function LowerNav({ display, onCartClick, setDisplay }) {
+    const handleLinkClick = () => {
+        if (setDisplay) {
+            setDisplay(false);
+        }
+    };
+
     return <div className={`lowerNav ${display ? 'show' : ''}`}>
         <div className='search-bar'>
 
         </div>
         <ul className="navlinks">
             <li>Spring/collection</li>
-            <li>Women</li>
-            <li>Men Us</li>
+            <li><Link to="/women" onClick={handleLinkClick}>Women</Link></li>
+            <li><Link to="/men" onClick={handleLinkClick}>Mens</Link></li>
             <li>Kids</li>
             <li>Gifts</li>
         </ul>
